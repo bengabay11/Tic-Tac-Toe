@@ -1,34 +1,46 @@
 import React, { FC } from 'react';
 import './Board.css';
 import Square from '../Square/Square';
+import { Player, SquareOwnership, squareOwnershipToValue } from '../../game';
 
 interface Props {
-    squares: string[];
-    onClick: (i: number) => void;
+    board: SquareOwnership[][];
+    onSquareClick: (boardRow: number, boardColumn: number) => void;
+    firstPlayer: Player;
+    secondPlayer: Player;
 }
 
-const Board: FC<Props> = ({ squares, onClick }) => {
-    const renderSquare = (i: number) => (
-        <Square value={squares[i]} onClick={() => onClick(i)} />
-    );
-
+const Board: FC<Props> = ({
+    board,
+    onSquareClick: onClick,
+    firstPlayer,
+    secondPlayer,
+}) => {
     return (
         <div>
-            <div className="board-row">
-                {renderSquare(0)}
-                {renderSquare(1)}
-                {renderSquare(2)}
-            </div>
-            <div className="board-row">
-                {renderSquare(3)}
-                {renderSquare(4)}
-                {renderSquare(5)}
-            </div>
-            <div className="board-row">
-                {renderSquare(6)}
-                {renderSquare(7)}
-                {renderSquare(8)}
-            </div>
+            {board.map((squareOwnershipsRow, rowIndex) => {
+                return (
+                    <div className="board-row" key={rowIndex}>
+                        {squareOwnershipsRow.map(
+                            (squareOwnership, columnIndex) => {
+                                return (
+                                    <Square
+                                        value={squareOwnershipToValue(
+                                            firstPlayer,
+                                            secondPlayer,
+                                            squareOwnership
+                                        )}
+                                        onClick={() =>
+                                            onClick(rowIndex, columnIndex)
+                                        }
+                                        key={columnIndex}
+                                    />
+                                );
+                            }
+                        )}
+                    </div>
+                );
+            })}
         </div>
     );
 };

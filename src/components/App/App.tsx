@@ -4,26 +4,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Board from '../Board/Board';
 import config from '../../config';
+import { Player, SquareOwnership, nextPlayerTurnName } from '../../game';
 
-type Player = 'X' | 'O';
-type BoardType = Player[];
+type BoardType = SquareOwnership[][];
 
 const App: React.FC = () => {
-    const [board, setBoard] = useState<BoardType>(Array(9).fill(null));
-    const [player, setPlayer] = useState<Player>('X');
+    const initBoard = () =>
+        new Array(config.boardSize)
+            .fill(null)
+            .map(() => new Array(config.boardSize).fill(SquareOwnership.Free));
 
-    const handleClick = (index: number) => {
+    const [board, setBoard] = useState<BoardType>(initBoard());
+    const [firstPlayerTurn, setFirstPlayerTurn] = useState(true);
+    const firstPlayer = new Player('X', 'Ben');
+    const secondPlayer = new Player('O', 'Gabay');
+
+    const handleClick = (boardRow: number, boardColumn: number) => {
         const boardCopy = [...board];
-        if (boardCopy[index] === null) {
-            boardCopy[index] = player;
+        if (boardCopy[boardRow][boardColumn] == SquareOwnership.Free) {
+            boardCopy[boardRow][boardColumn] = firstPlayerTurn
+                ? SquareOwnership.FirstPlayer
+                : SquareOwnership.SecondPlayer;
             setBoard(boardCopy);
-            setPlayer(player === 'X' ? 'O' : 'X');
+            setFirstPlayerTurn(!firstPlayerTurn);
         }
     };
 
     const restartGame = () => {
-        setBoard(Array(config.boardSize).fill(null));
-        setPlayer('X');
+        setBoard(initBoard());
+        setFirstPlayerTurn(true);
     };
 
     const getWinner = (): Player | null => {
@@ -40,14 +49,24 @@ const App: React.FC = () => {
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                return board[a];
+                if (a == SquareOwnership.FirstPlayer) {
+                    return firstPlayer;
+                } else if (a == SquareOwnership.SecondPlayer) {
+                    return secondPlayer;
+                }
             }
         }
         return null;
     };
 
     const winner = getWinner();
-    const status = winner ? `Winner: ${winner}` : `Next player: ${player}`;
+    const status = winner
+        ? `Winner: ${winner.name}`
+        : `Next player: ${nextPlayerTurnName(
+              firstPlayer,
+              secondPlayer,
+              firstPlayerTurn
+          )}`;
 
     return (
         <div className="game">
@@ -56,7 +75,12 @@ const App: React.FC = () => {
                 <div className="display-6 game-status">{status}</div>
             </div>
             <div className="game-board">
-                <Board squares={board} onClick={handleClick} />
+                <Board
+                    board={board}
+                    onSquareClick={handleClick}
+                    firstPlayer={firstPlayer}
+                    secondPlayer={secondPlayer}
+                />
             </div>
             <button
                 className="btn btn-primary restart-button"

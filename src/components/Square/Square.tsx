@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Square.css';
 
 interface SquareProps {
@@ -7,12 +7,22 @@ interface SquareProps {
 }
 
 const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+    const [active, setActive] = useState(true);
     let className = 'square';
     if (value) {
         className += ' ' + value;
     }
+    if (active) {
+        className += ' active';
+    }
     return (
-        <button className={className} onClick={onClick}>
+        <button
+            className={className}
+            onClick={() => {
+                setActive(false);
+                onClick();
+            }}
+        >
             {value}
         </button>
     );
