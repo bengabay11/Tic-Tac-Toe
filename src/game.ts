@@ -49,3 +49,8 @@ const getWinner = (
 
     return null;
 };
+
+export const initBoard = (boardSize: number) =>
+    new Array(boardSize)
+        .fill(null)
+        .map(() => new Array(boardSize).fill(SquareOwnership.Free));

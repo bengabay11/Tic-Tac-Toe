@@ -4,17 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Board from '../Board/Board';
 import config from '../../config';
-import { Player, SquareOwnership, nextPlayerTurnName } from '../../game';
+import {
+    Player,
+    SquareOwnership,
+    initBoard,
+    nextPlayerTurnName,
+} from '../../game';
 
 type BoardType = SquareOwnership[][];
 
 const App: React.FC = () => {
-    const initBoard = () =>
-        new Array(config.boardSize)
-            .fill(null)
-            .map(() => new Array(config.boardSize).fill(SquareOwnership.Free));
-
-    const [board, setBoard] = useState<BoardType>(initBoard());
+    const [board, setBoard] = useState<BoardType>(initBoard(config.boardSize));
     const [firstPlayerTurn, setFirstPlayerTurn] = useState(true);
     const firstPlayer = new Player('X', 'Ben');
     const secondPlayer = new Player('O', 'Gabay');
@@ -31,7 +31,7 @@ const App: React.FC = () => {
     };
 
     const restartGame = () => {
-        setBoard(initBoard());
+        setBoard(initBoard(config.boardSize));
         setFirstPlayerTurn(true);
     };
 
