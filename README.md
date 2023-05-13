@@ -2,6 +2,8 @@
 
 This is a simple Tic Tac Toe game built with React and TypeScript.
 
+![Tic-Tac-Toe logo](./public/favicon.ico)
+
 ## Installation
 
 To run the game locally, follow these steps:
