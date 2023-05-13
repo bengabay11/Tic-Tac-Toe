@@ -6,10 +6,16 @@ interface SquareProps {
     onClick: () => void;
 }
 
-const Square: React.FC<SquareProps> = ({ value, onClick }) => (
-    <button className="square" onClick={onClick}>
-        {value}
-    </button>
-);
+const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+    let className = 'square';
+    if (value) {
+        className += ' ' + value;
+    }
+    return (
+        <button className={className} onClick={onClick}>
+            {value}
+        </button>
+    );
+};
 
 export default Square;
