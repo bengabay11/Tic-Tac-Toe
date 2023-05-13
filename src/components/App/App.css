@@ -20,10 +20,15 @@ body {
 
 .game-info {
     margin: 0 auto;
+    margin-top: 4%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.game-status {
+    margin-top: 30px;
 }
 
 .game-board {
@@ -31,13 +36,13 @@ body {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 60px;
 }
 
 .restart-button {
     cursor: pointer;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 40px;
 }
 
 .game-over {
