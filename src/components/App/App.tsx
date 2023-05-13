@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Board from '../Board/Board';
+import config from '../../config';
 
 type Player = 'X' | 'O';
 type BoardType = Player[];
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     };
 
     const restartGame = () => {
-        setBoard(Array(9).fill(null));
+        setBoard(Array(config.boardSize).fill(null));
         setPlayer('X');
     };
 
@@ -51,17 +52,18 @@ const App: React.FC = () => {
     return (
         <div className="game">
             <div className="game-info">
-                <div className="display-1">{status}</div>
-                <button
-                    className="btn btn-primary restart-button"
-                    onClick={restartGame}
-                >
-                    Restart
-                </button>
+                <div className="display-1">{config.gameTitle}</div>
+                <div className="display-6 game-status">{status}</div>
             </div>
             <div className="game-board">
                 <Board squares={board} onClick={handleClick} />
             </div>
+            <button
+                className="btn btn-primary restart-button"
+                onClick={restartGame}
+            >
+                Restart
+            </button>
         </div>
     );
 };
