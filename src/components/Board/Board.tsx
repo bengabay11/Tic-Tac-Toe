@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import './Board.css';
 import Square from '../Square/Square';
-import { Player, SquareOwnership, squareOwnershipToValue } from '../../game';
+import { Player, SquareOwnership, squareOwnershipToPlayer } from '../../game';
 
 interface Props {
     board: SquareOwnership[][];
@@ -16,6 +16,14 @@ const Board: FC<Props> = ({
     firstPlayer,
     secondPlayer,
 }) => {
+    const squareOwnershipToSquareValue = (squareOwnership: SquareOwnership) => {
+        const player = squareOwnershipToPlayer(
+            firstPlayer,
+            secondPlayer,
+            squareOwnership
+        );
+        return player ? player.squareValue : '';
+    };
     return (
         <div>
             {board.map((squareOwnershipsRow, rowIndex) => {
@@ -25,9 +33,7 @@ const Board: FC<Props> = ({
                             (squareOwnership, columnIndex) => {
                                 return (
                                     <Square
-                                        value={squareOwnershipToValue(
-                                            firstPlayer,
-                                            secondPlayer,
+                                        value={squareOwnershipToSquareValue(
                                             squareOwnership
                                         )}
                                         onClick={() =>

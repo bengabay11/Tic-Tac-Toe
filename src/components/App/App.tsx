@@ -4,7 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Board from '../Board/Board';
 import config from '../../config';
-import { Player, SquareOwnership, initBoard } from '../../game';
+import {
+    Player,
+    SquareOwnership,
+    getWinner,
+    initBoard,
+    isDraw,
+    squareOwnershipToPlayer,
+} from '../../game';
 import GameStatus from '../GameStatus/GameStatus';
 import GameOverModal from '../GameOverModal/GameOverModal';
 
@@ -14,6 +21,7 @@ const App: React.FC = () => {
     const [board, setBoard] = useState<BoardType>(initBoard(config.boardSize));
     const [firstPlayerTurn, setFirstPlayerTurn] = useState(true);
     const [showGameOverModal, setShowGameOverModal] = useState(false);
+    const [winner, setWinner] = useState<Player | null>(null);
     const firstPlayer = new Player(
         config.firstPlayer.squareValue,
         config.firstPlayer.name
@@ -23,14 +31,26 @@ const App: React.FC = () => {
         config.secondPlayer.name
     );
 
-    const handleClick = (boardRow: number, boardColumn: number) => {
+    const handleClick = (row: number, column: number) => {
         const boardCopy = [...board];
-        if (boardCopy[boardRow][boardColumn] == SquareOwnership.Free) {
-            boardCopy[boardRow][boardColumn] = firstPlayerTurn
+        if (boardCopy[row][column] == SquareOwnership.Free) {
+            boardCopy[row][column] = firstPlayerTurn
                 ? SquareOwnership.FirstPlayer
                 : SquareOwnership.SecondPlayer;
             setBoard(boardCopy);
             setFirstPlayerTurn(!firstPlayerTurn);
+        }
+        const winnerSquareOwnership = getWinner(board, row, column);
+        if (winnerSquareOwnership != null) {
+            const winner = squareOwnershipToPlayer(
+                firstPlayer,
+                secondPlayer,
+                winnerSquareOwnership
+            );
+            setWinner(winner);
+            setShowGameOverModal(true);
+        } else if (isDraw(board)) {
+            setShowGameOverModal(true);
         }
     };
 
@@ -54,7 +74,7 @@ const App: React.FC = () => {
                 show={showGameOverModal}
                 setShow={setShowGameOverModal}
                 onRestart={restartGame}
-                winner={null}
+                winner={winner}
             ></GameOverModal>
             <div className="game-board">
                 <Board
