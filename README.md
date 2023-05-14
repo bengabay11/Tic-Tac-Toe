@@ -1,4 +1,4 @@
-# Tic Tac Toe Game
+# Tic Tac Toe
 
 This is a simple Tic Tac Toe game built with React and TypeScript.
 
@@ -42,9 +42,19 @@ This project uses ESLint for linting. To run the linter, use the command `yarn l
 
 This project uses Prettier for formatting. To format the code, use the command `yarn format`.
 
-## Production
+## Build
 
 To build the production version of the app, use the command `yarn build`. This will create an optimized build in the `build` directory.
+
+### Docker
+
+You can also build docker image with nginx server that will expose the game.
+
+To do so, you can use the [Dockerfile](Dockerfile) to build the image.
+
+## Hosting
+
+The game is accessible using vercel (here: <https://tic-tac-toe-six-alpha.vercel.app/>)
 
 ## License
 
