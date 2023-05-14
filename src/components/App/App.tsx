@@ -4,20 +4,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Board from '../Board/Board';
 import config from '../../config';
-import {
-    Player,
-    SquareOwnership,
-    initBoard,
-    nextPlayerTurnName,
-} from '../../game';
+import { Player, SquareOwnership, initBoard } from '../../game';
+import GameStatus from '../GameStatus/GameStatus';
+import GameOverModal from '../GameOverModal/GameOverModal';
 
 type BoardType = SquareOwnership[][];
 
 const App: React.FC = () => {
     const [board, setBoard] = useState<BoardType>(initBoard(config.boardSize));
     const [firstPlayerTurn, setFirstPlayerTurn] = useState(true);
-    const firstPlayer = new Player('X', 'Ben');
-    const secondPlayer = new Player('O', 'Gabay');
+    const [showGameOverModal, setShowGameOverModal] = useState(false);
+    const firstPlayer = new Player(
+        config.firstPlayer.squareValue,
+        config.firstPlayer.name
+    );
+    const secondPlayer = new Player(
+        config.secondPlayer.squareValue,
+        config.secondPlayer.name
+    );
 
     const handleClick = (boardRow: number, boardColumn: number) => {
         const boardCopy = [...board];
@@ -31,49 +35,27 @@ const App: React.FC = () => {
     };
 
     const restartGame = () => {
+        setShowGameOverModal(false);
         setBoard(initBoard(config.boardSize));
         setFirstPlayerTurn(true);
     };
-
-    const getWinner = (): Player | null => {
-        const lines = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6],
-        ];
-        for (let i = 0; i < lines.length; i++) {
-            const [a, b, c] = lines[i];
-            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                if (a == SquareOwnership.FirstPlayer) {
-                    return firstPlayer;
-                } else if (a == SquareOwnership.SecondPlayer) {
-                    return secondPlayer;
-                }
-            }
-        }
-        return null;
-    };
-
-    const winner = getWinner();
-    const status = winner
-        ? `Winner: ${winner.name}`
-        : `Next player: ${nextPlayerTurnName(
-              firstPlayer,
-              secondPlayer,
-              firstPlayerTurn
-          )}`;
 
     return (
         <div className="game">
             <div className="game-info">
                 <div className="display-1">{config.gameTitle}</div>
-                <div className="display-6 game-status">{status}</div>
+                <GameStatus
+                    firstPlayer={firstPlayer}
+                    secondPlayer={secondPlayer}
+                    firstPlayerTurn={firstPlayerTurn}
+                ></GameStatus>
             </div>
+            <GameOverModal
+                show={showGameOverModal}
+                setShow={setShowGameOverModal}
+                onRestart={restartGame}
+                winner={null}
+            ></GameOverModal>
             <div className="game-board">
                 <Board
                     board={board}
@@ -86,7 +68,7 @@ const App: React.FC = () => {
                 className="btn btn-primary restart-button"
                 onClick={restartGame}
             >
-                Restart
+                {config.restartButtonContent}
             </button>
         </div>
     );
