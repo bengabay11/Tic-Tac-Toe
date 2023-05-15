@@ -2,11 +2,11 @@ export default {
     gameTitle: 'Tic-Tac-Toe',
     boardSize: 3,
     firstPlayer: {
-        name: 'Ben',
+        name: 'Player1',
         squareValue: 'X',
     },
     secondPlayer: {
-        name: 'Gabay',
+        name: 'Player2',
         squareValue: 'O',
     },
     restartButtonContent: 'Restart',
