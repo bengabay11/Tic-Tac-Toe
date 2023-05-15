@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import './Board.css';
 import Square from '../Square/Square';
 import { Player, SquareOwnership, squareOwnershipToPlayer } from '../../game';
@@ -12,18 +12,21 @@ interface Props {
 
 const Board: FC<Props> = ({
     board,
-    onSquareClick: onClick,
+    onSquareClick,
     firstPlayer,
     secondPlayer,
 }) => {
-    const squareOwnershipToSquareValue = (squareOwnership: SquareOwnership) => {
-        const player = squareOwnershipToPlayer(
-            firstPlayer,
-            secondPlayer,
-            squareOwnership
-        );
-        return player ? player.squareValue : '';
-    };
+    const squareOwnershipToSquareValue = useCallback(
+        (squareOwnership: SquareOwnership) => {
+            const player = squareOwnershipToPlayer(
+                firstPlayer,
+                secondPlayer,
+                squareOwnership
+            );
+            return player ? player.squareValue : '';
+        },
+        []
+    );
     return (
         <div>
             {board.map((squareOwnershipsRow, rowIndex) => {
@@ -37,7 +40,7 @@ const Board: FC<Props> = ({
                                             squareOwnership
                                         )}
                                         onClick={() =>
-                                            onClick(rowIndex, columnIndex)
+                                            onSquareClick(rowIndex, columnIndex)
                                         }
                                         key={columnIndex}
                                     />

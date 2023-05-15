@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import config from '../../config';
@@ -17,7 +17,7 @@ const GameOverModal: React.FC<GameOverModalProps> = ({
     onRestart,
     winner,
 }) => {
-    const handleClose = () => setShow(false);
+    const handleClose = useCallback(() => setShow(false), []);
     const bodyContent = winner ? `${winner.name} won the game!` : 'Draw!';
 
     return (

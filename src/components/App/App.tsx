@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -34,34 +34,37 @@ const App: React.FC = () => {
         config.secondPlayer.name
     );
 
-    const handleClick = (row: number, column: number) => {
-        const boardCopy = [...board];
-        if (boardCopy[row][column] == SquareOwnership.Free) {
-            boardCopy[row][column] = firstPlayerTurn
-                ? SquareOwnership.FirstPlayer
-                : SquareOwnership.SecondPlayer;
-            setBoard(boardCopy);
-            setFirstPlayerTurn(!firstPlayerTurn);
-        }
-        const winnerSquareOwnership = getWinner(board, row, column);
-        if (winnerSquareOwnership != null) {
-            const winner = squareOwnershipToPlayer(
-                firstPlayer,
-                secondPlayer,
-                winnerSquareOwnership
-            );
-            setWinner(winner);
-            setShowGameOverModal(true);
-        } else if (isDraw(board)) {
-            setShowGameOverModal(true);
-        }
-    };
+    const handleClick = useCallback(
+        (row: number, column: number) => {
+            const boardCopy = [...board];
+            if (boardCopy[row][column] == SquareOwnership.Free) {
+                boardCopy[row][column] = firstPlayerTurn
+                    ? SquareOwnership.FirstPlayer
+                    : SquareOwnership.SecondPlayer;
+                setBoard(boardCopy);
+                setFirstPlayerTurn(!firstPlayerTurn);
+            }
+            const winnerSquareOwnership = getWinner(board, row, column);
+            if (winnerSquareOwnership != null) {
+                const winner = squareOwnershipToPlayer(
+                    firstPlayer,
+                    secondPlayer,
+                    winnerSquareOwnership
+                );
+                setWinner(winner);
+                setShowGameOverModal(true);
+            } else if (isDraw(board)) {
+                setShowGameOverModal(true);
+            }
+        },
+        [firstPlayerTurn]
+    );
 
-    const restartGame = () => {
+    const restartGame = useCallback(() => {
         setShowGameOverModal(false);
         setBoard(initBoard(config.boardSize));
         setFirstPlayerTurn(true);
-    };
+    }, []);
 
     return (
         <div className="game">
