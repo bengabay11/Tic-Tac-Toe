@@ -14,6 +14,9 @@ import {
 } from '../../game';
 import GameStatus from '../GameStatus/GameStatus';
 import GameOverModal from '../GameOverModal/GameOverModal';
+import { inject } from '@vercel/analytics';
+
+inject();
 
 type BoardType = SquareOwnership[][];
 
