@@ -8,6 +8,7 @@ interface GameOverModalProps {
     show: boolean;
     setShow: (newShow: boolean) => void;
     onRestart: () => void;
+    onBackToLogin: () => void;
     winner: Player | null;
 }
 
@@ -15,6 +16,7 @@ const GameOverModal: React.FC<GameOverModalProps> = ({
     show,
     setShow,
     onRestart,
+    onBackToLogin,
     winner,
 }) => {
     const handleClose = useCallback(() => setShow(false), []);
@@ -37,6 +39,9 @@ const GameOverModal: React.FC<GameOverModalProps> = ({
                 </Button>
                 <Button variant="primary" onClick={onRestart}>
                     {config.restartButtonContent}
+                </Button>
+                <Button variant="primary" onClick={onBackToLogin}>
+                    {config.backToLoginButtonContent}
                 </Button>
             </Modal.Footer>
         </Modal>

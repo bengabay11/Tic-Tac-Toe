@@ -1,10 +1,10 @@
 export class Player {
-    squareValue: string;
     name: string;
+    squareValue: string;
 
-    constructor(squareValue: string, name: string) {
-        this.squareValue = squareValue;
+    constructor(name: string, squareValue: string) {
         this.name = name;
+        this.squareValue = squareValue;
     }
 }
 

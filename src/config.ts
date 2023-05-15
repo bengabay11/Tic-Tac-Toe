@@ -10,4 +10,5 @@ export default {
         squareValue: 'O',
     },
     restartButtonContent: 'Restart',
+    backToLoginButtonContent: 'Back to login',
 };
