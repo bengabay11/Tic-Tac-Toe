@@ -16,7 +16,7 @@ const Square: React.FC<SquareProps> = ({ value, onClick }) => {
         className += ' active';
     }
     return (
-        <button
+        <div
             className={className}
             onClick={() => {
                 setActive(false);
@@ -24,7 +24,7 @@ const Square: React.FC<SquareProps> = ({ value, onClick }) => {
             }}
         >
             {value}
-        </button>
+        </div>
     );
 };
 
