@@ -12,6 +12,8 @@ import {
 import GameStatus from '../GameStatus/GameStatus';
 import GameOverModal from '../GameOverModal/GameOverModal';
 import { useNavigate } from 'react-router-dom';
+import GameTitle from '../GameTitle/GameTitle';
+import './Game.css';
 
 type BoardType = SquareOwnership[][];
 
@@ -71,8 +73,8 @@ const Game: React.FC<GameProps> = ({
 
     return (
         <div className="game">
+            <GameTitle />
             <div className="game-info">
-                <div className="display-1">{config.gameTitle}</div>
                 <GameStatus
                     firstPlayer={firstPlayer}
                     secondPlayer={secondPlayer}

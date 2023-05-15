@@ -13,32 +13,12 @@ body {
     margin: 0;
 }
 
-.game {
-    display: flex;
-    flex-direction: column;
-}
-
 .game-info {
     margin: 0 auto;
-    margin-top: 4%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.game-board {
-    margin-right: 20px;
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-    margin-top: 60px;
-}
-
-.restart-button {
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 40px;
 }
 
 .game-over {
@@ -77,15 +57,4 @@ body {
     flex-wrap: wrap;
     max-width: 600px;
     margin: 0 auto;
-}
-
-.game-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.game-buttons button {
-    margin: 20px; /* Adjust the margin as needed */
 }
