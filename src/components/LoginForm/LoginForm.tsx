@@ -44,6 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             <Form.Group controlId="player1">
                 <Form.Label className="player1-label">Player 1:</Form.Label>
                 <Form.Control
+                    required
                     className="input-field"
                     type="text"
                     value={firstPlayerName}
