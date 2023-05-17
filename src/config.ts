@@ -12,9 +12,20 @@ export default {
     buttonsContent: {
         restart: 'Restart',
         BackToLogin: 'Back to login',
+        startGame: 'Start game',
     },
     pageRoutes: {
         index: '/',
         game: '/game',
+    },
+    labels: {
+        loginForm: {
+            player1: 'Player1: ',
+            player2: 'Player2: ',
+            boardSize: 'Board Size: ',
+        },
+        game: {
+            status: 'Next Player: ',
+        },
     },
 };

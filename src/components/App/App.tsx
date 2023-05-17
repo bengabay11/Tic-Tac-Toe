@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -8,7 +8,7 @@ import Game from '../Game/Game';
 import LoginForm, { LoginFormData } from '../LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import config from '../../config';
-import { Player } from '../../game';
+import { Player } from '../../services/game';
 
 inject();
 
@@ -59,21 +59,30 @@ const App: React.FC = () => {
     //     // Store the count value in local storage whenever it changes
     // }, [firstPlayer, secondPlayer, boardSize]);
 
-    return (
-        <Routes>
-            <Route path="/" element={<LoginForm onLogin={onLogin} />} />
+    const routes = [
+        <Route
+            key={config.pageRoutes.index}
+            path={config.pageRoutes.index}
+            element={<LoginForm onLogin={onLogin} />}
+        />,
+    ];
+
+    if (boardSize != null && firstPlayer != null && secondPlayer != null) {
+        routes.push(
             <Route
                 path="/game"
                 element={
                     <Game
-                        boardSize={boardSize!}
-                        firstPlayer={firstPlayer!}
-                        secondPlayer={secondPlayer!}
+                        boardSize={boardSize}
+                        firstPlayer={firstPlayer}
+                        secondPlayer={secondPlayer}
                     />
                 }
             />
-        </Routes>
-    );
+        );
+    }
+
+    return <Routes>{routes}</Routes>;
 };
 
 export default App;
