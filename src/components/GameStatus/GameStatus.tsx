@@ -1,6 +1,7 @@
 import React from 'react';
 import './GameStatus.css';
-import { Player } from '../../game';
+import { Player } from '../../services/game';
+import config from '../../config';
 
 interface GameStatusProps {
     firstPlayer: Player;
@@ -13,7 +14,7 @@ const GameStatus: React.FC<GameStatusProps> = ({
     secondPlayer,
     firstPlayerTurn,
 }) => {
-    const statusMessage = `Next player: ${
+    const statusMessage = `${config.labels.game.status}${
         firstPlayerTurn ? firstPlayer.name : secondPlayer.name
     }`;
     return <div className="display-6 game-status">{statusMessage}</div>;

@@ -1,7 +1,11 @@
 import React, { FC, useCallback } from 'react';
 import './Board.css';
 import Square from '../Square/Square';
-import { Player, SquareOwnership, squareOwnershipToPlayer } from '../../game';
+import {
+    Player,
+    SquareOwnership,
+    squareOwnershipToPlayer,
+} from '../../services/game';
 
 interface Props {
     board: SquareOwnership[][];

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import config from '../../config';
-import { Player } from '../../game';
+import { Player } from '../../services/game';
 
 interface GameOverModalProps {
     show: boolean;

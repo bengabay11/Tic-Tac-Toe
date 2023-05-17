@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './LoginForm.css';
 import GameTitle from '../GameTitle/GameTitle';
+import config from '../../config';
 
 export class LoginFormData {
     boardSize: number;
@@ -42,7 +43,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         <Form onSubmit={onSubmit} className="login-form vertical-center">
             <GameTitle />
             <Form.Group controlId="player1">
-                <Form.Label className="player1-label">Player 1:</Form.Label>
+                <Form.Label className="player1-label">
+                    {config.labels.loginForm.player1}
+                </Form.Label>
                 <Form.Control
                     required
                     className="input-field"
@@ -53,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             </Form.Group>
 
             <Form.Group controlId="player2">
-                <Form.Label>Player 2:</Form.Label>
+                <Form.Label>{config.labels.loginForm.player2}</Form.Label>
 
                 <Form.Control
                     required
@@ -65,7 +68,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             </Form.Group>
 
             <Form.Group controlId="boardSize">
-                <Form.Label>Board Size:</Form.Label>
+                <Form.Label>{config.labels.loginForm.boardSize}</Form.Label>
                 <Form.Control
                     required
                     className="input-field"
@@ -80,7 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                 variant="primary"
                 type="submit"
             >
-                Start Game
+                {config.buttonsContent.startGame}
             </Button>
         </Form>
     );

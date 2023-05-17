@@ -8,7 +8,7 @@ import {
     initBoard,
     isDraw,
     squareOwnershipToPlayer,
-} from '../../game';
+} from '../../services/game';
 import GameStatus from '../GameStatus/GameStatus';
 import GameOverModal from '../GameOverModal/GameOverModal';
 import { useNavigate } from 'react-router-dom';
