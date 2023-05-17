@@ -68,7 +68,7 @@ const Game: React.FC<GameProps> = ({
 
     const backToLogin = useCallback(() => {
         restartGame();
-        navigate('/');
+        navigate(config.pageRoutes.index);
     }, []);
 
     return (
@@ -101,13 +101,13 @@ const Game: React.FC<GameProps> = ({
                     className="btn btn-primary restart-button"
                     onClick={restartGame}
                 >
-                    {config.restartButtonContent}
+                    {config.buttonsContent.restart}
                 </button>
                 <button
                     className="btn btn-primary restart-button"
                     onClick={backToLogin}
                 >
-                    {config.backToLoginButtonContent}
+                    {config.buttonsContent.BackToLogin}
                 </button>
             </div>
         </div>

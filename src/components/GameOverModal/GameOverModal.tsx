@@ -38,10 +38,10 @@ const GameOverModal: React.FC<GameOverModalProps> = ({
                     Close
                 </Button>
                 <Button variant="primary" onClick={onRestart}>
-                    {config.restartButtonContent}
+                    {config.buttonsContent.restart}
                 </Button>
                 <Button variant="primary" onClick={onBackToLogin}>
-                    {config.backToLoginButtonContent}
+                    {config.buttonsContent.BackToLogin}
                 </Button>
             </Modal.Footer>
         </Modal>

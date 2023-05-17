@@ -31,7 +31,7 @@ const App: React.FC = () => {
             )
         );
         setBoardSize(loginFormData.boardSize);
-        navigate('/game');
+        navigate(config.pageRoutes.game);
     }, []);
 
     // useEffect(() => {

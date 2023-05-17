@@ -9,6 +9,12 @@ export default {
         name: 'Player2',
         squareValue: 'O',
     },
-    restartButtonContent: 'Restart',
-    backToLoginButtonContent: 'Back to login',
+    buttonsContent: {
+        restart: 'Restart',
+        BackToLogin: 'Back to login',
+    },
+    pageRoutes: {
+        index: '/',
+        game: '/game',
+    },
 };
