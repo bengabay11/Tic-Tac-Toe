@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import config from '../../config';
 import { Player } from '../../services/game';
+import './GameOverModal.css';
 
 interface GameOverModalProps {
     show: boolean;

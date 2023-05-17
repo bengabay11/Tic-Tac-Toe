@@ -1,60 +1,10 @@
 html,
-body,
-html,
-body,
 #root {
-    height: 100%;
     background-color: lightblue;
 }
 
-body {
-    color: white;
-    font-size: calc(10px + 2vmin);
-    margin: 0;
-}
-
-.game-info {
-    margin: 0 auto;
+.vertical-center {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
-
-.game-over {
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.winner {
-    color: #0d6efd;
-}
-
-.play-again {
-    background-color: #0d6efd;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    cursor: pointer;
-    width: 200px;
-}
-
-.play-again:hover {
-    background-color: #0c63e4;
-}
-
-.board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 600px;
-    margin: 0 auto;
 }

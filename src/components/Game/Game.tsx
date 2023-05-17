@@ -74,13 +74,11 @@ const Game: React.FC<GameProps> = ({
     return (
         <div className="game">
             <GameTitle />
-            <div className="game-info">
-                <GameStatus
-                    firstPlayer={firstPlayer}
-                    secondPlayer={secondPlayer}
-                    firstPlayerTurn={firstPlayerTurn}
-                ></GameStatus>
-            </div>
+            <GameStatus
+                firstPlayer={firstPlayer}
+                secondPlayer={secondPlayer}
+                firstPlayerTurn={firstPlayerTurn}
+            ></GameStatus>
             <GameOverModal
                 show={showGameOverModal}
                 setShow={setShowGameOverModal}
