@@ -9,6 +9,7 @@ import LoginForm, { LoginFormData } from '../LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import { Player } from '../../services/game';
+import GameTitle from '../GameTitle/GameTitle';
 
 inject();
 
@@ -57,7 +58,12 @@ const App: React.FC = () => {
         );
     }
 
-    return <Routes>{routes}</Routes>;
+    return (
+        <div>
+            <GameTitle />
+            <Routes>{routes}</Routes>;
+        </div>
+    );
 };
 
 export default App;

@@ -1,16 +1,27 @@
-.player1-label {
-    margin-top: 50px;
-}
-
 label {
     margin-top: 6%;
-    font-size: 20px;
 }
 
 .login-form {
     width: 100%;
+    margin-top: 4%;
 }
 
 .start-game-button {
     margin-top: 4%;
+}
+
+.container {
+    margin: 0 auto;
+    width: 20%;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 60%;
+    }
+
+    .login-form {
+        margin-top: 12%;
+    }
 }

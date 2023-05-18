@@ -1,6 +1,6 @@
 export default {
     gameTitle: 'Tic-Tac-Toe',
-    boardSize: 3,
+    defaultBoardSize: 3,
     firstPlayer: {
         name: 'Player1',
         squareValue: 'X',
@@ -26,6 +26,11 @@ export default {
         },
         game: {
             status: 'Next Player: ',
+        },
+        errors: {
+            samePlayerNames:
+                'Second player name must be different from the first',
+            invalidBoardSize: 'Board size must be equal to or greater than 0',
         },
     },
 };

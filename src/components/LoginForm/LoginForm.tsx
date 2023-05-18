@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import './LoginForm.css';
-import GameTitle from '../GameTitle/GameTitle';
 import config from '../../config';
+import PlayerNameInput from '../PlayerNameInput/PlayerNameInput';
+import BoardSizeInput from '../BoardSizeInput/BoardSizeInput';
 
 export class LoginFormData {
     boardSize: number;
@@ -27,7 +28,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     const [firstPlayerName, setFirstPlayerName] = useState('');
     const [secondPlayerName, setSecondPlayerName] = useState('');
-    const [boardSize, setBoardSize] = useState(0);
+    const [boardSize, setBoardSize] = useState(config.defaultBoardSize);
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -41,47 +42,45 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
     return (
         <Form onSubmit={onSubmit} className="login-form vertical-center">
-            <GameTitle />
-            <Form.Group controlId="player1">
-                <Form.Label className="player1-label">
-                    {config.labels.loginForm.player1}
-                </Form.Label>
-                <Form.Control
-                    required
-                    className="input-field"
-                    type="text"
-                    value={firstPlayerName}
-                    onChange={(e) => setFirstPlayerName(e.target.value)}
-                />
-            </Form.Group>
+            <Container className="board-size-group-container">
+                <PlayerNameInput
+                    placeholder="Player1"
+                    setPlayerName={setFirstPlayerName}
+                    playerName={firstPlayerName}
+                    otherPlayerName={secondPlayerName}
+                    showAlert={false}
+                ></PlayerNameInput>
+            </Container>
 
-            <Form.Group controlId="player2">
-                <Form.Label>{config.labels.loginForm.player2}</Form.Label>
+            <Container className="board-size-group-container">
+                <PlayerNameInput
+                    placeholder="Player2"
+                    setPlayerName={setSecondPlayerName}
+                    playerName={secondPlayerName}
+                    otherPlayerName={firstPlayerName}
+                    showAlert={true}
+                ></PlayerNameInput>
+            </Container>
 
-                <Form.Control
-                    required
-                    className="input-field"
-                    type="text"
-                    value={secondPlayerName}
-                    onChange={(e) => setSecondPlayerName(e.target.value)}
+            <Container className="board-size-group-container">
+                <BoardSizeInput
+                    boardSize={boardSize}
+                    setBoardSize={setBoardSize}
                 />
-            </Form.Group>
-
-            <Form.Group controlId="boardSize">
-                <Form.Label>{config.labels.loginForm.boardSize}</Form.Label>
-                <Form.Control
-                    required
-                    className="input-field"
-                    type="number"
-                    value={boardSize}
-                    onChange={(e) => setBoardSize(parseInt(e.target.value, 10))}
-                />
-            </Form.Group>
+            </Container>
 
             <Button
                 className="start-game-button"
                 variant="primary"
                 type="submit"
+                disabled={
+                    !(
+                        boardSize > 0 &&
+                        firstPlayerName != secondPlayerName &&
+                        firstPlayerName != '' &&
+                        secondPlayerName != ''
+                    )
+                }
             >
                 {config.buttonsContent.startGame}
             </Button>

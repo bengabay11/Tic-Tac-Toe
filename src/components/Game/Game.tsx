@@ -12,7 +12,6 @@ import {
 import GameStatus from '../GameStatus/GameStatus';
 import GameOverModal from '../GameOverModal/GameOverModal';
 import { useNavigate } from 'react-router-dom';
-import GameTitle from '../GameTitle/GameTitle';
 import './Game.css';
 
 type BoardType = SquareOwnership[][];
@@ -73,7 +72,6 @@ const Game: React.FC<GameProps> = ({
 
     return (
         <div className="game">
-            <GameTitle />
             <GameStatus
                 firstPlayer={firstPlayer}
                 secondPlayer={secondPlayer}
@@ -86,14 +84,12 @@ const Game: React.FC<GameProps> = ({
                 onBackToLogin={backToLogin}
                 winner={winner}
             ></GameOverModal>
-            <div className="game-board">
-                <Board
-                    board={board}
-                    onSquareClick={handleClick}
-                    firstPlayer={firstPlayer}
-                    secondPlayer={secondPlayer}
-                />
-            </div>
+            <Board
+                board={board}
+                onSquareClick={handleClick}
+                firstPlayer={firstPlayer}
+                secondPlayer={secondPlayer}
+            />
             <div className="game-buttons">
                 <button
                     className="btn btn-primary restart-button"

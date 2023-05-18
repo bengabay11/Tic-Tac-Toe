@@ -32,7 +32,7 @@ const Board: FC<Props> = ({
         []
     );
     return (
-        <div>
+        <div className="game-board">
             {board.map((squareOwnershipsRow, rowIndex) => {
                 return (
                     <div className="board-row" key={rowIndex}>
