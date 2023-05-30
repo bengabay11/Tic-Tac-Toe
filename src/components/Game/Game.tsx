@@ -63,6 +63,7 @@ const Game: React.FC<GameProps> = ({
         setShowGameOverModal(false);
         setBoard(initBoard(boardSize));
         setFirstPlayerTurn(true);
+        setWinner(null);
     }, []);
 
     const backToLogin = useCallback(() => {
