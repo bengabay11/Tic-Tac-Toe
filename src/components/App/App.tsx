@@ -47,6 +47,7 @@ const App: React.FC = () => {
         routes.push(
             <Route
                 path="/game"
+                key={config.pageRoutes.game}
                 element={
                     <Game
                         boardSize={boardSize}
