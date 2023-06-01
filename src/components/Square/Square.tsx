@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Square.css';
+import { SquareOwnership } from '../../services/game';
 
 interface SquareProps {
-    value: string;
+    squareOwnership: SquareOwnership;
+    content: string;
     onClick: () => void;
 }
 
-const Square: React.FC<SquareProps> = ({ value, onClick }) => {
-    const [active, setActive] = useState(true);
+const Square: React.FC<SquareProps> = ({
+    squareOwnership,
+    content,
+    onClick,
+}) => {
     let className = 'square';
-    if (value) {
-        className += ' ' + value;
+    if (content) {
+        className += ' ' + content;
     }
-    if (active) {
+    if (squareOwnership == SquareOwnership.Free) {
         className += ' active';
     }
     return (
-        <div
-            className={className}
-            onClick={() => {
-                setActive(false);
-                onClick();
-            }}
-        >
-            {value}
+        <div className={className} onClick={onClick}>
+            {content}
         </div>
     );
 };

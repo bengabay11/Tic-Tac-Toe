@@ -40,13 +40,14 @@ const Board: FC<Props> = ({
                             (squareOwnership, columnIndex) => {
                                 return (
                                     <Square
-                                        value={squareOwnershipToSquareValue(
+                                        content={squareOwnershipToSquareValue(
                                             squareOwnership
                                         )}
                                         onClick={() =>
                                             onSquareClick(rowIndex, columnIndex)
                                         }
                                         key={columnIndex}
+                                        squareOwnership={squareOwnership}
                                     />
                                 );
                             }
