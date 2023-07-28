@@ -1,24 +1,24 @@
-// useEffect(() => {
-//     // Retrieve the stored count value from local storage
-//     const rawFirstPlayer = localStorage.getItem('firstPlayer');
-//     const rawSecondPlayer = localStorage.getItem('secondPlayer');
-//     const rawBoardSize = localStorage.getItem('boardSize');
-//     if (rawFirstPlayer != null) {
-//         setFirstPlayer(JSON.parse(rawFirstPlayer));
-//     }
-//     if (rawSecondPlayer != null) {
-//         setSecondPlayer(JSON.parse(rawSecondPlayer));
-//     }
-//     if (rawBoardSize != null) {
-//         setBoardSize(JSON.parse(rawBoardSize));
-//     }
-// }, []);
+import config from '../config';
 
-// useEffect(() => {
-//     if (boardSize) {
-//         localStorage.setItem('firstPlayer', JSON.stringify(firstPlayer));
-//         localStorage.setItem('secondPlayer', JSON.stringify(secondPlayer));
-//         localStorage.setItem('boardSize', boardSize.toString());
-//     }
-//     // Store the count value in local storage whenever it changes
-// }, [firstPlayer, secondPlayer, boardSize]);
+export const loadStateFromLocalStorage = () => {
+    const serializedState = localStorage.getItem(
+        config.statLocalStorageKeyName
+    );
+    if (serializedState === null) {
+        return undefined;
+    }
+    try {
+        return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+};
+
+export const saveStateToLocalStorage = (state: any) => {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem(config.statLocalStorageKeyName, serializedState);
+    } catch (err) {
+        // ignore errors
+    }
+};

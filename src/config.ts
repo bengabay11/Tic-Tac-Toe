@@ -1,6 +1,7 @@
 export default {
     gameTitle: 'Tic-Tac-Toe',
     defaultBoardSize: 3,
+    statLocalStorageKeyName: 'state',
     firstPlayer: {
         name: 'Player1',
         squareValue: 'X',
